@@ -18,17 +18,16 @@ public class EvtPlayerChat implements Listener {
 
 	@EventHandler
 	public void onPlayerChat(PlayerChatEvent e) {
-		System.out.println("aqui");
-		if (plugin.getPlayerLogged().isLogged(e.getPlayer())) {
+		if (plugin.getLogin().isLogged(e.getPlayer())) {
 			return;
 		}
 		e.setCancelled(true);
-		e.getPlayer().sendMessage("Você deve autenticar-se antes!");
+		e.getPlayer().sendMessage("[AuthGosch] §cErro: §6Para utilizar o chat é necessário que esteja autenticado.");
 	}
 
 	@EventHandler
 	public void onPlayerCommand(PlayerCommandPreprocessEvent e) {
-		if (plugin.getPlayerLogged().isLogged(e.getPlayer())) {
+		if (plugin.getLogin().isLogged(e.getPlayer())) {
 			return;
 		}
 		if (e.getMessage().toLowerCase().startsWith("/login ") || e.getMessage().toLowerCase().startsWith("/register ")
@@ -38,6 +37,7 @@ public class EvtPlayerChat implements Listener {
 				|| e.getMessage().toLowerCase().startsWith("/entrar ")) {
 			return;
 		}
+		e.getPlayer().sendMessage("[AuthGosch] §cErro: §6Para acionar comandos é necessário estar autenticado.");
 		e.setCancelled(true);
 
 	}

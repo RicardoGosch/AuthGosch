@@ -1,0 +1,5 @@
+# Mensagens Padrão
+ComandoSomentePlayer: "§4Comando somente para players."
+ComandoDesconhecido: "Comando desconhecido."
+SemPermissaoComando: "§6Você não possui permissão para executar este comando."
+

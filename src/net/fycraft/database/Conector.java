@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DAOConector {
+public class Conector {
 	
 	private final static String DRIVER = "com.mysql.jdbc.Driver";
 	private final static String URL = "jdbc:mysql://localhost:3306/fycraft_survival";

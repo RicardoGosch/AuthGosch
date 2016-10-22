@@ -21,15 +21,24 @@ public class CmdLogin implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		Player player;
+		/*
+		 * TODO Responsável pela captação do comando de login dos jogadores.
+		 * USE: /<command> [pass]
+		 *
+		 * <command> = [login, entrar, logar]
+		 *
+		 */
+
+		// Verifica se é o console usando o comando
 		if (!(sender instanceof Player)) {
 			sender.sendMessage(ChatColor.RED + "Comando habilitado somente para players!");
+			return true;
 		}
-		player = (Player) sender;
+		Player player = (Player) sender;
 
 		// Verifica se o player já está autenticado
-		if (plugin.getPlayerLogged().isLogged(player)) {
-			player.sendMessage("[FyCraft] §9Você já está autenticado!");
+		if (plugin.getLogin().isLogged(player)) {
+			player.sendMessage("[FyCraft] §6Você já está autenticado!");
 			return true;
 		}
 
@@ -37,25 +46,30 @@ public class CmdLogin implements CommandExecutor {
 		if (!User.exists(player)) {
 			player.sendMessage("[FyCraft] §cUse: §6/registrar [senha] [senha]");
 		}
-		
+
 		// Verifica se o player inseriu mais de 1 argumento
 		if (args.length != 1) {
 			player.sendMessage("[FyCraft] §cUse: §6/entrar [senha]");
 			return true;
 		}
-		
+
 		// Verifica se o login está correto
 		if (User.auth(player, args[0])) {
-			player.sendMessage("[FyCraft] §9Autenticado com sucesso!");
-			plugin.getPlayerLogged().setLogged(player);
+			player.sendMessage("[FyCraft] §6Autenticado com sucesso!");
+
+			// Seta o player como logado na lista
+			plugin.getLogin().setLogged(player);
+
+			// Lança o evento
 			Bukkit.getServer().getPluginManager().callEvent(new PlayerLoginEvent(player, false));
 			return true;
 		}
-		
-		// Caso chegue até aqui, significa que a senha está incorreta
-		player.sendMessage("[FyCraft] §cSenha incorreta!");
 
-		plugin.getPlayerLogged().setUnlogged(player);
-		return false;
+		// Caso chegue até aqui, significa que a senha está incorreta
+		player.sendMessage("[FyCraft] §cErro: §6A senha informada está incorreta!");
+
+		// Por segurança, força na lista que o player continue não autenticado
+		plugin.getLogin().setUnlogged(player);
+		return true;
 	}
 }

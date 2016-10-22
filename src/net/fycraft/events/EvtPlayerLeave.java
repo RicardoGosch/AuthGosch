@@ -14,7 +14,8 @@ public class EvtPlayerLeave implements Listener {
 	}
 	
 	public void onPlayerLeave(PlayerQuitEvent e){
-		plugin.getPlayerLogged().removePlayer(e.getPlayer());
+		plugin.getLogin().removePlayer(e.getPlayer());
+		e.setQuitMessage(null);
 	}
 	
 }
