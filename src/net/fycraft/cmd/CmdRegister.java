@@ -38,7 +38,7 @@ public class CmdRegister implements CommandExecutor {
 		Player player = (Player) sender;
 
 		// Verifica se o player já está autenticado
-		if (plugin.getLogin().isLogged(player)) {
+		if (AuthGosch.getLogin().isLogged(player)) {
 			player.sendMessage("[FyCraft] §6Você já está autenticado!");
 			return true;
 		}
@@ -63,7 +63,7 @@ public class CmdRegister implements CommandExecutor {
 
 		// Registra o player no banco
 		if (User.register(player, args[0])) {
-			plugin.getLogin().setLogged(player);
+			AuthGosch.getLogin().setLogged(player);
 			Bukkit.getServer().getPluginManager().callEvent(new PlayerRegisterEvent(player));
 			Bukkit.getServer().getPluginManager().callEvent(new PlayerLoginEvent(player, true));
 			player.sendMessage("[FyCraft] §6Que ótimo! Você foi cadastrado com sucesso!");

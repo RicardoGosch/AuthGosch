@@ -1,11 +1,10 @@
 package net.fycraft;
 
-import java.io.File;
 import java.util.Collection;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -22,7 +21,8 @@ import net.fycraft.helper.PlayerLoginList;
 public class AuthGosch extends JavaPlugin {
 	private static PlayerLoginList playerLogged;
 	private FileConfiguration messages;
-	private File fileMessages;
+	private static Location spawn;
+//	private File fileMessages;
 
 	@Override
 	public void onEnable() {
@@ -30,11 +30,11 @@ public class AuthGosch extends JavaPlugin {
 
 		// Instancia do objeto da lista de jogadores logados ou não
 		playerLogged = new PlayerLoginList();
-
+		spawn = new Location(Bukkit.getWorld("world_spawn"), 532, 171, 1205, 89, -2);
 		// Handlers
 		registerEvents();
 		registerCommands();
-		loadFile();
+		//loadFile();
 
 		// Kicka todos os jogadores que estiverem online
 		Collection<? extends Player> players = Bukkit.getOnlinePlayers();
@@ -49,7 +49,7 @@ public class AuthGosch extends JavaPlugin {
 
 	}
 
-	public PlayerLoginList getLogin() {
+	public static PlayerLoginList getLogin() {
 		return playerLogged;
 	}
 
@@ -70,6 +70,7 @@ public class AuthGosch extends JavaPlugin {
 
 		// Player Inventory
 		Bukkit.getPluginManager().registerEvents(new EvtPlayerInventory(this), this);
+
 	}
 
 	private void registerCommands() {
@@ -78,16 +79,20 @@ public class AuthGosch extends JavaPlugin {
 		getCommand("register").setExecutor(new CmdRegister(this));
 		getCommand("auth").setExecutor(new CmdAuth(this));
 	}
-
-	private void loadFile() {
-		if (!getDataFolder().exists()) {
-			getDataFolder().mkdirs();
-		}
-
-		if (!fileMessages.exists())
-			saveResource("messages.yml", false);
-		messages = YamlConfiguration.loadConfiguration(fileMessages);
+	
+	public static Location getSpawn(){
+		return spawn;
 	}
+
+//	private void loadFile() {
+//		if (!getDataFolder().exists()) {
+//			getDataFolder().mkdirs();
+//		}
+//
+//		if (!fileMessages.exists())
+//			saveResource("messages.yml", false);
+//		messages = YamlConfiguration.loadConfiguration(fileMessages);
+//	}
 
 	public FileConfiguration getMessages() {
 		return messages;

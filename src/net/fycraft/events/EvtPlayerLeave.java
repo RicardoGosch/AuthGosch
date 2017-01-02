@@ -14,7 +14,7 @@ public class EvtPlayerLeave implements Listener {
 	}
 	
 	public void onPlayerLeave(PlayerQuitEvent e){
-		plugin.getLogin().removePlayer(e.getPlayer());
+		AuthGosch.getLogin().removePlayer(e.getPlayer());
 		e.setQuitMessage(null);
 	}
 	

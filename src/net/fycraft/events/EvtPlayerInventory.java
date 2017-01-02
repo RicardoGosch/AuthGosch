@@ -19,7 +19,7 @@ public class EvtPlayerInventory implements Listener {
 	
 	@EventHandler
 	public void onPlayerInventory(InventoryClickEvent e){
-		if(plugin.getLogin().isLogged((Player)e.getWhoClicked())){
+		if(AuthGosch.getLogin().isLogged((Player)e.getWhoClicked())){
 			return;
 		}
 		e.setCancelled(true);
@@ -28,7 +28,7 @@ public class EvtPlayerInventory implements Listener {
 	
 	@EventHandler
 	public void onPlayerDropInventory(PlayerDropItemEvent e){
-		if(plugin.getLogin().isLogged(e.getPlayer())){
+		if(AuthGosch.getLogin().isLogged(e.getPlayer())){
 			return;
 		}
 		e.setCancelled(true);
@@ -37,7 +37,7 @@ public class EvtPlayerInventory implements Listener {
 	
 	@EventHandler
 	public void onPlayerDropInventory(PlayerPickupItemEvent e){
-		if(plugin.getLogin().isLogged(e.getPlayer())){
+		if(AuthGosch.getLogin().isLogged(e.getPlayer())){
 			return;
 		}
 		e.setCancelled(true);

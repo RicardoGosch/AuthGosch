@@ -19,7 +19,7 @@ public class EvtPlayerMove implements Listener {
 	
 	@EventHandler
 	public void playerMove(PlayerMoveEvent e){
-		if(plugin.getLogin().isLogged(e.getPlayer())){
+		if(AuthGosch.getLogin().isLogged(e.getPlayer())){
 			return;
 		}
 		

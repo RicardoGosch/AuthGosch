@@ -10,10 +10,7 @@ import net.fycraft.database.model.User;
 
 public class CmdAuth implements CommandExecutor {
 
-	private AuthGosch plugin;
-
 	public CmdAuth(AuthGosch plugin) {
-		this.plugin = plugin;
 	}
 
 	@Override
@@ -71,7 +68,7 @@ public class CmdAuth implements CommandExecutor {
 		String newPass = args[2];
 
 		// Verifica se o player está logado
-		if (!plugin.getLogin().isLogged(player))
+		if (!AuthGosch.getLogin().isLogged(player))
 			return;
 
 		// Verifica se o player existe no banco

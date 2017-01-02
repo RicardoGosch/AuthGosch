@@ -5,10 +5,9 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 public class PlayerLoginEvent extends Event {
+	private static final HandlerList handlers = new HandlerList();
 	private Player player;
 	private boolean isFirstTime;
-	
-	private static final HandlerList handlers = new HandlerList();
 		
 	
 	public PlayerLoginEvent(Player player, Boolean isFirstTime) {
@@ -16,19 +15,21 @@ public class PlayerLoginEvent extends Event {
 		this.isFirstTime = isFirstTime;
 	}
 	
+	// Método obrigatório
 	public HandlerList getHandlers() {
 		return handlers;
 	}
 	
-	public static HandlerList getHandlerList() {
-        return handlers;
-    }
+	// Método obrigatório
+	public static HandlerList getHandlerList(){
+		return handlers;
+	}
 	
 	public Player getPlayer(){
-		return player;
+		return this.player;
 	}
 	
 	public Boolean isFirstTime(){
-		return isFirstTime;
+		return this.isFirstTime;
 	}
 }

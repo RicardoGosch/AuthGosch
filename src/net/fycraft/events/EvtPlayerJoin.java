@@ -1,6 +1,5 @@
 package net.fycraft.events;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -46,7 +45,7 @@ public class EvtPlayerJoin implements Listener {
 		for (int a = 0; a < 2; a++)
 			player.sendMessage("");
 
-		plugin.getLogin().addPlayer(player);
+		AuthGosch.getLogin().addPlayer(player);
 		
 		// Repeater
 		new BukkitRunnable() {
@@ -60,7 +59,7 @@ public class EvtPlayerJoin implements Listener {
 				} else {
 					TitleAPI.sendTitle(player, 0, 40, 0, "§6§lFyCraft", "§c/registrar [senha] [senha]");
 				}
-				if (plugin.getLogin().isLogged(player)) {
+				if (AuthGosch.getLogin().isLogged(player)) {
 					TitleAPI.clearTitle(player);
 					this.cancel();
 					return;
@@ -84,7 +83,8 @@ public class EvtPlayerJoin implements Listener {
 
 			}
 		}.runTaskTimer(plugin, 0L, 30L);
-		e.getPlayer().teleport(new Location(Bukkit.getWorld("world_spawn"), 561, 6, 1205));
+		Location spawn = AuthGosch.getSpawn();
+		e.getPlayer().teleport(spawn);
 		if (player.isFlying())
 			player.setFlying(false);
 

@@ -37,7 +37,7 @@ public class CmdLogin implements CommandExecutor {
 		Player player = (Player) sender;
 
 		// Verifica se o player já está autenticado
-		if (plugin.getLogin().isLogged(player)) {
+		if (AuthGosch.getLogin().isLogged(player)) {
 			player.sendMessage("[FyCraft] §6Você já está autenticado!");
 			return true;
 		}
@@ -58,10 +58,10 @@ public class CmdLogin implements CommandExecutor {
 			player.sendMessage("[FyCraft] §6Autenticado com sucesso!");
 
 			// Seta o player como logado na lista
-			plugin.getLogin().setLogged(player);
+			AuthGosch.getLogin().setLogged(player);
 
 			// Lança o evento
-			Bukkit.getServer().getPluginManager().callEvent(new PlayerLoginEvent(player, false));
+			Bukkit.getServer().getPluginManager().callEvent(new PlayerLoginEvent(player, true));
 			return true;
 		}
 
@@ -69,7 +69,7 @@ public class CmdLogin implements CommandExecutor {
 		player.sendMessage("[FyCraft] §cErro: §6A senha informada está incorreta!");
 
 		// Por segurança, força na lista que o player continue não autenticado
-		plugin.getLogin().setUnlogged(player);
+		AuthGosch.getLogin().setUnlogged(player);
 		return true;
 	}
 }

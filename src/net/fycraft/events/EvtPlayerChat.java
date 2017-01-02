@@ -1,6 +1,7 @@
 package net.fycraft.events;
 
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
@@ -16,18 +17,18 @@ public class EvtPlayerChat implements Listener {
 		this.plugin = plugin;
 	}
 
-	@EventHandler
+	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerChat(PlayerChatEvent e) {
-		if (plugin.getLogin().isLogged(e.getPlayer())) {
+		if (AuthGosch.getLogin().isLogged(e.getPlayer())) {
 			return;
 		}
 		e.setCancelled(true);
 		e.getPlayer().sendMessage("[AuthGosch] §cErro: §6Para utilizar o chat é necessário que esteja autenticado.");
 	}
 
-	@EventHandler
+	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerCommand(PlayerCommandPreprocessEvent e) {
-		if (plugin.getLogin().isLogged(e.getPlayer())) {
+		if (AuthGosch.getLogin().isLogged(e.getPlayer())) {
 			return;
 		}
 		if (e.getMessage().toLowerCase().startsWith("/login ") || e.getMessage().toLowerCase().startsWith("/register ")
